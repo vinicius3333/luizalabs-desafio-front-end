@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Corner />
     <Header />
     <div class="wrapper">
       <router-view />
@@ -9,9 +10,11 @@
 
 <script>
 import Header from "./components/Header/Header";
+import Corner from "./components/Corner/Corner";
 export default {
   components: {
     Header,
+    Corner,
   },
 };
 </script>
