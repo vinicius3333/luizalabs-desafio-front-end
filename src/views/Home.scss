@@ -1,14 +1,15 @@
 .home {
+  .home-title {
+    margin: 0 0 2rem;
+    text-align: start;
+    font-weight: 900;
+  }
+
   .home-loading {
     display: flex;
     align-self: center;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 4rem);
-
-    @media (max-width: 768px) {
-      height: calc(100vh - 2rem);
-    }
   }
 
   .home-grid {
@@ -19,7 +20,7 @@
 
     @media (max-width: 768px) {
       gap: 16px;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
     }
   }
 }

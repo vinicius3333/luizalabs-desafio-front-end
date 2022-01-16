@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <h2 class="home-title">Home</h2>
     <div class="home-loading" v-if="getLoading">
       <Spinner />
     </div>
