@@ -4,6 +4,7 @@
       :for="`favorite[${id}]`"
       class="card-container-checkbox"
       v-if="showCheckbox"
+      aria-label="Checkbox em formato de coração"
     >
       <input
         :id="`favorite[${id}]`"
@@ -18,6 +19,7 @@
       v-if="showCloseButton"
       class="card-button-close"
       @click="$emit('click-close')"
+      aria-label="Botão de fechar"
     >
       <XCircleIcon size="30" />
     </button>
