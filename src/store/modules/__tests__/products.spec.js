@@ -48,7 +48,7 @@ describe("store/products/getters", () => {
   it("should returns the loading state", () => {
     products.mutations.setLoading(stateLoading, true);
 
-    expect(stateLoading.loading).toBe(true);
+    expect(products.getters.getLoading(stateLoading)).toBe(true);
   });
 });
 

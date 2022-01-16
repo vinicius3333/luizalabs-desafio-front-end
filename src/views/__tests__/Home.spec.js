@@ -15,6 +15,7 @@ describe("Home", () => {
   let getters;
   let mutations;
   let actions;
+  let spyOnClickCheckbox;
 
   beforeEach(() => {
     getters = {
@@ -23,6 +24,7 @@ describe("Home", () => {
       getFavoritesIds: () => [dummyArray[1].id],
       getLoading: () => false,
     };
+    spyOnClickCheckbox = jest.spyOn(Home.methods, "onClickCheckbox");
     mutations = {
       setProducts: jest.fn(),
       addFavorites: jest.fn(),
@@ -41,7 +43,14 @@ describe("Home", () => {
         },
       },
     });
-    wrapper = shallowMount(Home, { store, localVue });
+    wrapper = shallowMount(Home, {
+      store,
+      localVue,
+    });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it("renders without crash", () => {
@@ -52,5 +61,29 @@ describe("Home", () => {
     expect(wrapper.findAllComponents(ProductCard)).toHaveLength(
       dummyArray.length
     );
+  });
+
+  it("calls addFavorites mutation", async () => {
+    wrapper.findComponent(ProductCard).vm.$emit("click-checkbox", true);
+
+    await wrapper.vm.$nextTick();
+
+    expect(spyOnClickCheckbox).toHaveBeenCalledWith({
+      checked: true,
+      product: { id: 1 },
+    });
+    expect(mutations.addFavorites).toHaveBeenCalledWith({}, { id: 1 });
+  });
+
+  it("calls removeFavorites mutation", async () => {
+    wrapper.findComponent(ProductCard).vm.$emit("click-checkbox", false);
+
+    await wrapper.vm.$nextTick();
+
+    expect(spyOnClickCheckbox).toHaveBeenCalledWith({
+      checked: false,
+      product: { id: 1 },
+    });
+    expect(mutations.removeFavorites).toHaveBeenCalledWith({}, 1);
   });
 });
