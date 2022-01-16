@@ -1,17 +1,15 @@
 <template>
   <article class="card">
-    <div class="container-checkbox">
-      <label for="favorite" class="checkbox-heart">
-        <input
-          id="favorite"
-          name="favorite"
-          type="checkbox"
-          :checked="checked"
-          @click="(e) => $emit('click-checkbox', e.target.checked)"
-        />
-        <heart-icon size="24" />
-      </label>
-    </div>
+    <label :for="`favorite[${id}]`" class="container-checkbox">
+      <input
+        :id="`favorite[${id}]`"
+        name="favorite"
+        type="checkbox"
+        :checked="checked"
+        @click="(e) => $emit('click-checkbox', e.target.checked)"
+      />
+      <heart-icon size="24" />
+    </label>
     <img
       :src="image.src"
       :alt="image.alt"
@@ -40,8 +38,8 @@ export default {
     image: {
       type: Object,
       default: () => ({
-        src: "https://via.placeholder.com/300x300",
-        alt: "Image",
+        src: "",
+        alt: "",
       }),
     },
     title: {
@@ -58,6 +56,9 @@ export default {
     checked: {
       type: Boolean,
       default: false,
+    },
+    id: {
+      type: Number,
     },
   },
 

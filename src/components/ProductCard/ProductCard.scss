@@ -2,13 +2,14 @@
   max-width: 300px;
   border: 1px solid #cfcbd0;
   border-radius: 0.5rem;
-  box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   position: relative;
   min-height: 480px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  background-color: #fff;
 
   .container-checkbox {
     position: absolute;
@@ -21,6 +22,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 
     // triangle
     &:before {
@@ -32,6 +38,7 @@
       padding-bottom: 50%;
       width: 57.7%;
       z-index: -1;
+      cursor: pointer;
 
       -webkit-transform-origin: 0 0;
       -ms-transform-origin: 0 0;
@@ -44,31 +51,23 @@
       border-radius: 0 0 0 1px;
     }
 
-    .checkbox-heart {
-      z-index: 2;
-      cursor: pointer;
-      user-select: none;
-      -moz-user-select: none;
-      -webkit-user-select: none;
-      -ms-user-select: none;
+    input {
+      display: none;
+      position: absolute;
+
+      &:checked ~ svg {
+        fill: #ff3c3c;
+        transform: scale(1.15);
+      }
+    }
+
+    svg {
+      fill: #fff;
+      transition: all 200ms cubic-bezier(0.57, 1.9, 0, 1.52);
+      transition-delay: 0s;
       position: absolute;
       top: 10px;
-
-      input {
-        display: none;
-        position: absolute;
-
-        &:checked ~ svg {
-          fill: #ff3c3c;
-          transform: scale(1.15);
-        }
-      }
-
-      svg {
-        fill: #fff;
-        transition: all 200ms cubic-bezier(0.57, 1.9, 0, 1.52);
-        transition-delay: 0s;
-      }
+      z-index: 2;
     }
   }
 
@@ -79,15 +78,14 @@
   }
 
   .card-body {
-      .title {
-        margin: 0.5rem 0 3rem;
-      }
-    
-      .price {
-        color: #eee12d;
-        font-weight: 600;
-        margin: 0;
-      }
-  }
+    .title {
+      margin: 0.5rem 0.5rem 3rem;
+    }
 
+    .price {
+      color: #eee12d;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
 }
