@@ -28,7 +28,6 @@
       :alt="image.alt"
       width="300"
       height="300"
-      loading="lazy"
       class="card-img"
     />
     <div class="card-body">

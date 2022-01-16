@@ -7,7 +7,6 @@ const dummyImageAttributes = {
   alt: "dummy alt",
   width: "300",
   height: "300",
-  loading: "lazy",
 };
 const dummyTitle = "dummy title";
 const currencyId = "BRL";
