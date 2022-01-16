@@ -46,6 +46,7 @@ export default {
   methods: {
     ...mapMutations("products", ["removeFavorites"]),
     //fixes transition list absolute bug
+    /* istanbul ignore next */
     beforeLeave(el) {
       const { marginLeft, marginTop, width, height } =
         window.getComputedStyle(el);

@@ -123,4 +123,18 @@ describe("ProductCard", () => {
 
     expect(wrapper.emitted()["click-close"]).toBeTruthy();
   });
+
+  it("handles default image prop", () => {
+    expect(wrapper.vm.$options.props.image.default.call()).toStrictEqual({
+      src: "",
+      alt: "",
+    });
+  });
+
+  it("handles default price prop", () => {
+    expect(wrapper.vm.$options.props.price.default.call()).toStrictEqual({
+      value: 0,
+      currencyId: "BRL",
+    });
+  });
 });
