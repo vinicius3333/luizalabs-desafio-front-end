@@ -5,7 +5,7 @@ describe("Header", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(Header);
+    wrapper = shallowMount(Header, { stubs: ["router-link"] });
   });
 
   it("renders without crash", () => {

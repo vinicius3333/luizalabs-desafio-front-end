@@ -5,7 +5,9 @@ describe("Home", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(Wishlist);
+    wrapper = shallowMount(Wishlist, {
+      stubs: ["router-link"],
+    });
   });
 
   it("renders without crash", () => {
