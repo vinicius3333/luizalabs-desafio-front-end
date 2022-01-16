@@ -17,6 +17,23 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p {
+    margin: 0;
+    font-weight: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
 body {
   margin: 0;
 }

@@ -1,11 +1,11 @@
 import { shallowMount } from "@vue/test-utils";
-import Header from "../Header";
+import Wishlist from "../Wishlist";
 
-describe("Header", () => {
+describe("Home", () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(Header);
+    wrapper = shallowMount(Wishlist);
   });
 
   it("renders without crash", () => {

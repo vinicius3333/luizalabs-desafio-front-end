@@ -2,7 +2,7 @@ import { shallowMount } from "@vue/test-utils";
 import Spinner from "../Spinner";
 
 describe("Spinner", () => {
-  it("renders without crashing", () => {
+  it("renders without crash", () => {
     const wrapper = shallowMount(Spinner);
     expect(wrapper).toBeTruthy();
   });

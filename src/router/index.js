@@ -1,6 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+
+const Home = () =>
+  import(/* webpackChunkName: "Home" */ "../views/Home/Home.vue");
+const Wishlist = () =>
+  import(/* webpackChunkName: "Wishlist" */ "../views/Wishlist/Wishlist.vue");
 
 Vue.use(VueRouter);
 
@@ -9,6 +13,15 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/wishlist",
+    name: "Wishlist",
+    component: Wishlist,
+  },
+  {
+    path: "*",
+    redirect: { name: "Home" },
   },
 ];
 

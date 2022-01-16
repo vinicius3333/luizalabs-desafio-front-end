@@ -22,8 +22,8 @@
 <script>
 import "./Home.scss";
 import { mapActions, mapGetters, mapMutations } from "vuex";
-import ProductCard from "../components/ProductCard/ProductCard";
-import Spinner from "../components/Spinner/Spinner";
+import ProductCard from "@/components/ProductCard/ProductCard";
+import Spinner from "@/components/Spinner/Spinner";
 
 export default {
   name: "Home",

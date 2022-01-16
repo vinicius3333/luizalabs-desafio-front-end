@@ -7,11 +7,13 @@
 
       <div class="header-container">
         <ul class="header-container-wrapper-items">
-          <li v-for="item in items" :key="item.text" class="item">
-            <Component :is="item.icon" size="20" />
-            <p>
-              {{ item.text }}
-            </p>
+          <li v-for="item in items" :key="item.text">
+            <router-link :to="{ name: item.link }" class="item">
+              <Component :is="item.icon" size="20" />
+              <p>
+                {{ item.text }}
+              </p>
+            </router-link>
           </li>
         </ul>
         <div class="header-container-wrapper-input">
@@ -45,14 +47,17 @@ export default {
         {
           icon: MapPinIcon,
           text: "Cidade: São Paulo",
+          link: "Home",
         },
         {
           icon: PhoneIcon,
           text: "Central de atendimento",
+          link: "Home",
         },
         {
           icon: HeartIcon,
           text: "Lista de desejos",
+          link: "Wishlist",
         },
       ],
     };
