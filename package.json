@@ -7,14 +7,17 @@
     "build": "vue-cli-service build",
     "test:unit": "cross-env NODE_ICU_DATA=node_modules/full-icu vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "node server.js"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
     "current-script-polyfill": "^1.0.0",
+    "express": "^4.17.2",
     "register-service-worker": "^1.7.1",
+    "serve-static": "^1.14.2",
     "vue": "^2.6.11",
     "vue-feather-icons": "^5.1.0",
     "vue-router": "^3.2.0",
