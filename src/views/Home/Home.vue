@@ -13,7 +13,7 @@
         :image="{ src: product.image, alt: product.title }"
         :id="product.id"
         @click-checkbox="(checked) => onClickCheckbox({ checked, product })"
-        :checked="getFavoritesIds.includes(product.id)"
+        :checked="getFavoritesIds.indexOf(product.id) !== -1"
       />
     </div>
   </div>

@@ -42,7 +42,6 @@ body {
   font-family: "Roboto", Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
 
   .wrapper {
     max-width: calc(1440px - 4rem);

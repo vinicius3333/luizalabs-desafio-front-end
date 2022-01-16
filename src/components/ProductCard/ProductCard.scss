@@ -10,6 +10,7 @@
   flex-direction: column;
   flex-wrap: wrap;
   background-color: #fff;
+  text-align: center;
 
   .card-container-checkbox {
     position: absolute;
@@ -27,6 +28,11 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+
+    // fix ie11 layout
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      display: block;
+    }
 
     // triangle
     &:before {
@@ -68,6 +74,7 @@
       transition-delay: 0s;
       position: absolute;
       top: 10px;
+      left: 8px;
       z-index: 2;
     }
   }
