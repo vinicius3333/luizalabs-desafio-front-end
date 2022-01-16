@@ -84,7 +84,7 @@ describe("ProductCard", () => {
   });
 
   it("should emit a click event when checkbox is clicked", async () => {
-    wrapper = shallowMount(ProductCard);
+    await wrapper.setProps({ checked: false });
 
     const checkbox = wrapper.find("input[type='checkbox']");
 
@@ -95,5 +95,32 @@ describe("ProductCard", () => {
 
     expect(wrapper.emitted()["click-checkbox"]).toBeTruthy();
     expect(wrapper.emitted()["click-checkbox"][0]).toStrictEqual([true]);
+  });
+
+  it("not renders a checkbox when showCheckbox is false", async () => {
+    const findCheckbox = (wrapper) => wrapper.find("input[type='checkbox']");
+
+    expect(findCheckbox(wrapper).exists()).toBe(true);
+
+    await wrapper.setProps({ showCheckbox: false });
+
+    expect(findCheckbox(wrapper).exists()).toBe(false);
+  });
+
+  it("renders a close button", async () => {
+    await wrapper.setProps({ showCloseButton: true });
+
+    expect(wrapper.find("button").exists()).toBe(true);
+  });
+
+  it("should emit a click event when the close button is clicked", async () => {
+    await wrapper.setProps({ showCloseButton: true, showCheckbox: false });
+
+    const closeButton = wrapper.find("button");
+
+    await closeButton.trigger("click");
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.emitted()["click-close"]).toBeTruthy();
   });
 });

@@ -43,7 +43,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  font-display: swap;
 
   .wrapper {
     max-width: calc(1440px - 4rem);

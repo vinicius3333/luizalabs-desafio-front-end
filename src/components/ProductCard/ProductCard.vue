@@ -1,6 +1,10 @@
 <template>
   <article class="card">
-    <label :for="`favorite[${id}]`" class="container-checkbox">
+    <label
+      :for="`favorite[${id}]`"
+      class="card-container-checkbox"
+      v-if="showCheckbox"
+    >
       <input
         :id="`favorite[${id}]`"
         name="favorite"
@@ -10,6 +14,13 @@
       />
       <heart-icon size="24" />
     </label>
+    <button
+      v-if="showCloseButton"
+      class="card-button-close"
+      @click="$emit('click-close')"
+    >
+      <XCircleIcon size="30" />
+    </button>
     <img
       :src="image.src"
       :alt="image.alt"
@@ -28,11 +39,12 @@
 <script>
 import "./ProductCard.scss";
 import { formatCurrency } from "../../utils/formatCurrency";
-import { HeartIcon } from "vue-feather-icons";
+import { HeartIcon, XCircleIcon } from "vue-feather-icons";
 
 export default {
   components: {
     HeartIcon,
+    XCircleIcon,
   },
   props: {
     image: {
@@ -59,6 +71,14 @@ export default {
     },
     id: {
       type: Number,
+    },
+    showCheckbox: {
+      type: Boolean,
+      default: true,
+    },
+    showCloseButton: {
+      type: Boolean,
+      default: false,
     },
   },
 
