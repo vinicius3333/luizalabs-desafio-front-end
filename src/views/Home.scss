@@ -1,0 +1,25 @@
+.home {
+  .home-loading {
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 4rem);
+
+    @media (max-width: 768px) {
+      height: calc(100vh - 2rem);
+    }
+  }
+
+  .home-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px 16px;
+    justify-items: center;
+
+    @media (max-width: 768px) {
+      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+  }
+}

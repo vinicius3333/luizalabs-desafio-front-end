@@ -1,16 +1,47 @@
 import { shallowMount } from "@vue/test-utils";
-import ProductCard from "@/components/ProductCard/ProductCard";
-import { formatCurrency } from "../../src/utils/formatCurrency";
+import ProductCard from "../ProductCard";
+import { formatCurrency } from "@/utils/formatCurrency";
+
+const dummyImageAttributes = {
+  src: "dummyimage.com",
+  alt: "dummy alt",
+  width: "300",
+  height: "300",
+  loading: "lazy",
+};
+const dummyTitle = "dummy title";
+const currencyId = "BRL";
+const dummyPrice = 245.7;
 
 describe("ProductCard", () => {
-  it("renders the component without crash", () => {
-    const wrapper = shallowMount(ProductCard);
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = shallowMount(ProductCard, {
+      propsData: {
+        image: {
+          src: dummyImageAttributes.src,
+          alt: dummyImageAttributes.alt,
+        },
+        title: dummyTitle,
+        price: {
+          value: dummyPrice,
+          currencyId,
+        },
+        checked: true,
+      },
+    });
+  });
+
+  afterEach(() => {
+    wrapper = null;
+  });
+
+  it("renders without crash", () => {
     expect(wrapper).toBeTruthy();
   });
 
   it("renders the card, his image, title and favorite checkbox", () => {
-    const wrapper = shallowMount(ProductCard);
-
     const card = wrapper.find("article");
     const cardImage = wrapper.find("img");
     const cardTitle = wrapper.find("h2");
@@ -23,23 +54,6 @@ describe("ProductCard", () => {
   });
 
   it("renders image with attributes", () => {
-    const dummyImageAttributes = {
-      src: "dummyimage.com",
-      alt: "dummy alt",
-      width: "300",
-      height: "300",
-      loading: "lazy",
-    };
-
-    const wrapper = shallowMount(ProductCard, {
-      propsData: {
-        image: {
-          src: dummyImageAttributes.src,
-          alt: dummyImageAttributes.alt,
-        },
-      },
-    });
-
     const image = wrapper.find("img");
 
     const keyAttributes = Object.keys(dummyImageAttributes);
@@ -50,32 +64,12 @@ describe("ProductCard", () => {
   });
 
   it("renders a title", () => {
-    const dummyTitle = "dummy title";
-
-    const wrapper = shallowMount(ProductCard, {
-      propsData: {
-        title: dummyTitle,
-      },
-    });
-
     const title = wrapper.find("h2");
 
     expect(title.text()).toBe(dummyTitle);
   });
 
   it("renders a price", () => {
-    const currencyId = "BRL";
-    const dummyPrice = 245.7;
-
-    const wrapper = shallowMount(ProductCard, {
-      propsData: {
-        price: {
-          value: dummyPrice,
-          currencyId,
-        },
-      },
-    });
-
     const price = wrapper.find("p");
 
     expect(price.text()).toBe(
@@ -84,15 +78,13 @@ describe("ProductCard", () => {
   });
 
   it("renders a checkbox checked", () => {
-    const wrapper = shallowMount(ProductCard, { propsData: { checked: true } });
-
     const checkbox = wrapper.find("input[type='checkbox']");
 
     expect(checkbox.element.checked).toBeTruthy();
   });
 
   it("should emit a click event when checkbox is clicked", async () => {
-    const wrapper = shallowMount(ProductCard);
+    wrapper = shallowMount(ProductCard);
 
     const checkbox = wrapper.find("input[type='checkbox']");
 

@@ -1,13 +1,15 @@
 import products from "../products";
 
-jest.mock("axios", () => jest.fn(() => Promise.resolve({ data: [{ id: 1 }] })));
+jest.mock("axios", () =>
+  jest.fn(() => Promise.resolve({ data: { products: [{ id: 1 }] } }))
+);
 
 const dummyValue = [{ id: 1 }];
 const dummyArray = [{ id: 1 }, { id: 2 }, { id: 3 }];
 
 let stateProducts;
-
 let stateFavorites;
+let stateLoading;
 
 beforeEach(() => {
   stateProducts = {
@@ -16,6 +18,10 @@ beforeEach(() => {
 
   stateFavorites = {
     favorites: [],
+  };
+
+  stateLoading = {
+    loading: false,
   };
 });
 
@@ -30,6 +36,19 @@ describe("store/products/getters", () => {
     stateFavorites.favorites = dummyArray;
 
     expect(products.getters.getFavorites(stateFavorites)).toBe(dummyArray);
+  });
+
+  it("should returns the ids of favorites state", () => {
+    stateFavorites.favorites = dummyArray;
+    expect(products.getters.getFavoritesIds(stateFavorites)).toStrictEqual(
+      dummyArray.map(({ id }) => id)
+    );
+  });
+
+  it("should returns the loading state", () => {
+    products.mutations.setLoading(stateLoading, true);
+
+    expect(stateLoading.loading).toBe(true);
   });
 });
 
@@ -53,12 +72,24 @@ describe("store/products/mutations", () => {
 
     expect(stateFavorites.favorites).not.toContain(dummyArray[0].id);
   });
+
+  it("should change loading state", () => {
+    expect(stateLoading.loading).toBe(false);
+
+    products.mutations.setLoading(stateLoading, true);
+
+    expect(stateLoading.loading).toBe(true);
+  });
 });
 
 describe("store/products/action", () => {
   it("should commits setProducts mutation", async () => {
     const commit = jest.fn();
     await products.actions.fetchProducts({ commit });
-    expect(commit).toHaveBeenCalledWith("setProducts", [{ id: 1 }]);
+    expect(commit.mock.calls).toEqual([
+      ["setLoading", true],
+      ["setProducts", [{ id: 1 }]],
+      ["setLoading", false],
+    ]);
   });
 });

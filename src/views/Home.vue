@@ -1,46 +1,55 @@
 <template>
   <div class="home">
-    <ProductCard
-      v-for="product in getProducts.products"
-      :key="product.id"
-      :title="product.title"
-      :price="{ value: product.price, currencyId: product.currencyId }"
-      :image="{ src: product.image, alt: product.title }"
-      :id="product.id"
-    />
+    <div class="home-loading" v-if="getLoading">
+      <Spinner />
+    </div>
+    <div class="home-grid" v-else>
+      <ProductCard
+        v-for="product in getProducts"
+        :key="product.id"
+        :title="product.title"
+        :price="{ value: product.price, currencyId: product.currencyId }"
+        :image="{ src: product.image, alt: product.title }"
+        :id="product.id"
+        @click-checkbox="(checked) => onClickCheckbox({ checked, product })"
+        :checked="getFavoritesIds.includes(product.id)"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import "./Home.scss";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 import ProductCard from "../components/ProductCard/ProductCard";
-import { mapActions, mapGetters } from "vuex";
+import Spinner from "../components/Spinner/Spinner";
 
 export default {
   name: "Home",
   components: {
     ProductCard,
+    Spinner,
   },
   methods: {
     ...mapActions("products", ["fetchProducts"]),
+    ...mapMutations("products", ["addFavorites", "removeFavorites"]),
+    onClickCheckbox({ checked, product }) {
+      if (checked) {
+        return this.addFavorites(product);
+      }
+      this.removeFavorites(product.id);
+    },
   },
   beforeMount() {
     this.fetchProducts();
   },
   computed: {
-    ...mapGetters("products", ["getProducts"]),
+    ...mapGetters("products", [
+      "getProducts",
+      "getFavorites",
+      "getFavoritesIds",
+      "getLoading",
+    ]),
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.home {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-  justify-items: center;
-
-  @media (max-width: 425px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-}
-</style>

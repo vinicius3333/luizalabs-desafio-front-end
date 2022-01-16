@@ -7,7 +7,9 @@ Vue.use(Vuex);
 
 const persist = new VuexPersistence({
   storage: window.localStorage,
-  reducer: (state) => ({ favorites: state.products.favorites }),
+  reducer: (state) => ({
+    products: { favorites: state.products.favorites, products: [] },
+  }),
 });
 
 export default new Vuex.Store({
